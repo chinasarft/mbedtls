@@ -11,6 +11,8 @@ set(targets
     ssl_client1
     ssl_client2
     ssl_server
+    dtls_srtp_server
+    dtls_srtp_client
     ssl_fork_server
     ssl_mail_client
     mini_client
@@ -52,6 +54,14 @@ target_link_libraries(ssl_mail_client ${libs})
 
 add_executable(mini_client mini_client.c)
 target_link_libraries(mini_client ${libs})
+
+add_executable(dtls_srtp_client dtls_srtp_client.c)
+target_sources(dtls_srtp_client PUBLIC query_config.c)
+target_link_libraries(dtls_srtp_client ${libs})
+
+add_executable(dtls_srtp_server dtls_srtp_server.c)
+target_sources(dtls_srtp_server PUBLIC query_config.c)
+target_link_libraries(dtls_srtp_server ${libs})
 
 if(THREADS_FOUND)
     add_executable(ssl_pthread_server ssl_pthread_server.c)
